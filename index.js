@@ -44,7 +44,16 @@ const composeFederation = compose((services) => {
 });
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    allowedHeaders:
+      "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, X-Hive-Signature-256",
+    origin: "*",
+    optionsSuccessStatus: 200,
+    methods: ["GET", "OPTIONS", "PATCH", "DELETE", "POST", "PUT"],
+    credentials: true,
+  })
+);
 
 app.get("/", (req, res) => {
   res.send("Hello world");
