@@ -46,8 +46,18 @@ const composeFederation = compose((services) => {
 const app = express();
 app.use(
   cors({
-    allowedHeaders:
-      "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, X-Hive-Signature-256",
+    allowedHeaders: [
+      "X-CSRF-Token",
+      "X-Requested-With",
+      "Accept",
+      "Accept-Version",
+      "Content-Length",
+      "Content-MD5",
+      "Content-Type",
+      "Date",
+      "X-Api-Version",
+      "X-Hive-Signature-256",
+    ],
     origin: "*",
     optionsSuccessStatus: 200,
     methods: ["GET", "OPTIONS", "PATCH", "DELETE", "POST", "PUT"],
@@ -57,10 +67,12 @@ app.use(
 
 app.get("/", (req, res) => {
   res.send("Hello world");
+  return;
 });
 
 app.options("/api/compose", (req, res) => {
   res.status(200).end();
+  return;
 });
 
 app.post("/api/compose", (req, res) => {
